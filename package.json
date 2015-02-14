@@ -1,0 +1,22 @@
+{
+  "name": "promise-xhr",
+  "version": "0.0.1",
+  "description": "XMLHttpRequest wrapped in native ES6 Promises",
+  "main": "promise-xhr.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wildlyinaccurate/promise-xhr.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Joseph Wynn <joseph@wildlyinaccurate.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-6to5": "^3.0.0",
+    "gulp-concat": "^2.4.3",
+    "gulp-uglify": "^1.1.0",
+    "gulp-umd": "^0.1.3"
+  }
+}
