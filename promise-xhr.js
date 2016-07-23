@@ -60,10 +60,8 @@ xhr.get = function (url) {
  * @return {Promise}
  */
 xhr.getJSON = function (url) {
-    return new Promise(function (resolve, reject) {
-        xhr.get(url).then(function (response) {
-            resolve(JSON.parse(response));
-        });
+    return xhr.get(url).then(function (response) {
+        return JSON.parse(response);
     });
 };
 
