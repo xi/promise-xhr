@@ -49,10 +49,8 @@ xhr.get = function(url) {
  * @return {Promise}
  */
 xhr.getJSON = function(url) {
-    return new Promise((resolve, reject) => {
-        xhr.get(url).then((response) => {
-            resolve(JSON.parse(response))
-        })
+    return xhr.get(url).then((response) => {
+        return JSON.parse(response)
     })
 }
 
