@@ -2,26 +2,35 @@
 
 `XMLHttpRequest` wrapped in native ES6 Promises.
 
+The API is a minimal subset of the [fetch spec](https://fetch.spec.whatwg.org/).
+A [more complete polyfill](https://github.com/github/fetch/) is available.
+
 ## Usage
 
 ```js
 xhr = require('promise-xhr')
 
 // Methods always return a `Promise`
-xhr.get('/foo').then(function(response) {
-    console.log('Response:', response)
-}, function(e) {
-    console.log('Error:', e)
-})
+fetch('/foo')
+    .then(function(response) {
+        if (response.ok) {
+            return response.text();
+        } else {
+            throw response;
+        }
+    })
+    .then(function(text) {
+        console.log('Response:', text);
+    })
+    .catch(function(e) {
+        console.log('Error:', e);
+    });
 
 // Promise resolves JSON-decoded data
-xhr.getJSON('/foo.json')
+fetch('/foo.json').then(r => r.json());
 
 // POST request
-xhr.post('/foo', 'foo=bar&baz=foo')
-
-xhr({
-    url: '/foo',
+fetch('/foo', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',

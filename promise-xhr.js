@@ -9,16 +9,32 @@
 }(this, function() {
   "use strict";
 
+  function Response(request) {
+    this.ok = request.status < 400;
+    this.status = request.status;
+    this.statusText = request.statusText;
+    this.url = request.responseUrl
+
+    this.text = function() {
+      return Promise.resolve(request.responseText);
+    };
+
+    this.json = function() {
+      return this.text().then(function(text) {
+        return JSON.parse(text);
+      });
+    };
+  }
+
   /**
    * Send an HTTP request
    *
    * Options:
-   *     url     (string) the URL to open
-   *     method  (string) request method
+   *     method  (string) request method [GET]
    *     headers (object) request headers
    *     data    (mixed)  request data
    */
-  function xhr(options) {
+  function fetch(url, options) {
     var req = new XMLHttpRequest();
 
     return new Promise(function (resolve, reject) {
@@ -27,10 +43,10 @@
           return;
         }
 
-        if (req.status >= 400) {
+        if (req.status === 0) {
           reject(e);
         } else {
-          resolve(e.target.response);
+          resolve(new Response(req));
         }
       };
 
@@ -38,43 +54,10 @@
         req.setRequestHeader(key, options.headers[key]);
       });
 
-      req.open(options.method, options.url, true);
+      req.open(options.method || 'GET', url, true);
       req.send(options.data);
     });
   }
 
-  /**
-   * Send a GET HTTP request
-   *
-   * @param  {string} url
-   * @return {Promise}
-   */
-  xhr.get = function (url) {
-    return xhr({ method: "GET", url: url });
-  };
-
-  /**
-   * Send a GET HTTP request, returning a JSON-decoded response
-   *
-   * @param  {string} url
-   * @return {Promise}
-   */
-  xhr.getJSON = function (url) {
-    return xhr.get(url).then(function (response) {
-      return JSON.parse(response);
-    });
-  };
-
-  /**
-   * Send a POST HTTP request
-   *
-   * @param  {string} url
-   * @param  {*} data
-   * @return {Promise}
-   */
-  xhr.post = function (url, data) {
-    return xhr({ method: "POST", url: url, data: data });
-  };
-
-  return xhr;
+  return fetch;
 }));
