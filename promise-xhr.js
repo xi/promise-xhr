@@ -35,6 +35,8 @@
    *     data    (mixed)  request data
    */
   function fetch(url, options) {
+    options = options || {};
+
     var req = new XMLHttpRequest();
 
     return new Promise(function (resolve, reject) {
