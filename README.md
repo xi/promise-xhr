@@ -2,11 +2,7 @@
 
 `XMLHttpRequest` wrapped in native ES6 Promises.
 
-**Currently still under development.**
-
 ## Usage
-
-For the ES6 module, use `./src/promise-xhr.js`. For ES5 use `./promise-xhr.js` or `./promise-xhr.min.js` along with a Promise polyfill like [jakearchibald/es6-promise](https://github.com/jakearchibald/es6-promise).
 
 ```js
 xhr = require('promise-xhr')
@@ -35,10 +31,8 @@ xhr({
 })
 ```
 
-## TODO
-
- * Allow plain objects for POST data
- * Set Content-Type header for POST requests based on data type
+For older browsers you need a Promise polyfill like
+[jakearchibald/es6-promise](https://github.com/jakearchibald/es6-promise).
 
 # LICENSE
 
