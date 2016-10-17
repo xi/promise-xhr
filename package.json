@@ -1,0 +1,12 @@
+{
+  "name": "promise-xhr",
+  "version": "1.0.0",
+  "description": "XMLHttpRequest wrapped in native ES6 Promises",
+  "main": "promise-xhr.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xi/promise-xhr.git"
+  },
+  "author": "Joseph Wynn <joseph@wildlyinaccurate.com>",
+  "license": "MIT"
+}
