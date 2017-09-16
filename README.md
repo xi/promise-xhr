@@ -8,7 +8,7 @@ A [more complete polyfill](https://github.com/github/fetch/) is available.
 ## Usage
 
 ```js
-xhr = require('promise-xhr')
+fetch = require('promise-xhr')
 
 // Methods always return a `Promise`
 fetch('/foo')
